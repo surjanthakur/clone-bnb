@@ -35,9 +35,9 @@ def create_listings(listing: Listing, session=Depends(get_session)):
 
 
 # get listing by id
-@router.get("/listings/{id}", response_model=ShowListing)
+@router.get("/listings/{id}")
 def get_listing(
-    id: int,
+    id: str,
     session_db: Session = Depends(get_session),
 ):
     try:
@@ -50,7 +50,7 @@ def get_listing(
 # update listing by id
 @router.put("/listings/{id}/update", response_model=ShowListing)
 def update_listings(
-    id: int,
+    id: str,
     listing: ShowListing,
     session_db: Session = Depends(get_session),
 ):
@@ -63,7 +63,7 @@ def update_listings(
             setattr(db_listing, k, v)
         session_db.commit()
         session_db.refresh(db_listing)
-        return {"updated listing": db_listing}
+        return db_listing
     except Exception as err:
         raise HTTPException(status_code=404, detail=f"listing not update {err} !")
 
@@ -71,7 +71,7 @@ def update_listings(
 # delete listing by id
 @router.delete("/listings/{id}/delete")
 def delete_listings(
-    id: int,
+    id: str,
     session_db: Session = Depends(get_session),
 ):
     try:
@@ -80,6 +80,6 @@ def delete_listings(
             raise HTTPException(status_code=404, detail="listing not found !")
         session_db.delete(del_listing)
         session_db.commit()
-        return {"deleted listing": del_listing}
+        return del_listing
     except Exception as err:
         raise HTTPException(status_code=404, detail=f"listing not delete {err} !")
