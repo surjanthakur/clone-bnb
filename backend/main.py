@@ -4,6 +4,9 @@ from database import create_db
 
 app = FastAPI()
 
+# listings router
+app.include_router(listings.router)
+
 
 # create database
 @app.on_event("startup")
