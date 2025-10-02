@@ -6,3 +6,6 @@ class ShowListing(BaseModel):
     about: str
     country: str
     location: str
+
+    class Config:
+        orm_mode = True

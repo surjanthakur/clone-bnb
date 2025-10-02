@@ -3,14 +3,13 @@ from pydantic_model import ShowListing
 from database_schema import Listing
 from database import get_session
 from sqlmodel import Session
-from typing import List
 import uuid
 
 router = APIRouter(tags=["listings routes"])
 
 
 # get all routes
-@router.get("/listings", response_model=List[ShowListing])
+@router.get("/listings")
 def all_listings(session_db: Session = Depends(get_session)):
     try:
         all_listing = session_db.query(Listing).all()
