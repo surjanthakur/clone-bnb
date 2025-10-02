@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from router import listings, users
+from router import listings
 from database import create_db
 
 app = FastAPI()
