@@ -48,7 +48,9 @@ def get_listing(
 
 
 # update listing by id
-@router.put("/listings/{id}/update", response_model=ShowListing)
+@router.put(
+    "/listings/{id}/update",
+)
 def update_listings(
     id: str,
     listing: ShowListing,
