@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function Listing() {
   const { id } = useParams();
@@ -28,6 +28,10 @@ export default function Listing() {
             <p className="text-red-500 text-sm">
               <span className="font-medium">Location:</span> {listing.location}
             </p>
+            <Link to={`/listing/${listing.id}/update`}>
+              <button className="text-pink-600 mt-5">edit</button>
+            </Link>
+            <button className="text-black-800 ml-5">delete</button>
           </div>
         </div>
       </div>
