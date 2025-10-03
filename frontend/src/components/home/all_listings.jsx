@@ -18,6 +18,10 @@ export default function Home() {
     <>
       <div>
         <h1 className="text-2xl font-bold mb-4">All Listings</h1>
+        <Link to="/listing/create">
+          {" "}
+          <h2>create new listing</h2>
+        </Link>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {listings.map((list) => (
             <Link to={`/listing/${list.id}`}>

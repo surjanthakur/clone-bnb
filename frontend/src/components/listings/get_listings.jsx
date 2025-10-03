@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 export default function Listing() {
+  const Navigate = useNavigate();
   const { id } = useParams();
   const [listing, setListing] = useState({});
 
@@ -12,6 +13,17 @@ export default function Listing() {
       .then((res) => setListing(res.data))
       .catch((err) => console.log("cant get id:", err));
   }, []);
+
+  const deleteListing = async () => {
+    try {
+      await axios.delete(`http://localhost:8000/listings/${id}/delete`);
+      alert("listing was deleted");
+      Navigate("/");
+    } catch (err) {
+      print(err);
+    }
+  };
+
   return (
     <>
       <div>
@@ -31,7 +43,9 @@ export default function Listing() {
             <Link to={`/listing/${listing.id}/update`}>
               <button className="text-pink-600 mt-5">edit</button>
             </Link>
-            <button className="text-black-800 ml-5">delete</button>
+            <button onClick={deleteListing} className="text-black-800 ml-5">
+              delete
+            </button>
           </div>
         </div>
       </div>
