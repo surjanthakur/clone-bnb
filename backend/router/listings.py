@@ -18,7 +18,7 @@ def all_listings(session_db: Session = Depends(get_session)):
         raise HTTPException(status_code=404, detail=f"listings not found {err} !")
 
 
-@router.post("/listings/create", response_model=ShowListing)
+@router.post("/listings/create")
 def create_listings(listing: Listing, session=Depends(get_session)):
     listing_id = str(uuid.uuid4())
     new_listing = Listing(
